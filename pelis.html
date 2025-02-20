@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="src/output.css" rel="stylesheet" />
+    <script src="js/main.js"></script>
+    <title>Netflix</title>
+    
+
+<link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+
+   
+</head>
+<body class="bg-black text-white">
+
+    <!-- Fondo con imagen -->
+    <div class="relative w-full h-screen bg-cover bg-center" style="background-image: url('media/img/img1.jpeg');">
+        
+        <!-- Navbar -->
+        <nav class="absolute top-0 left-0 w-full flex justify-between p-6 z-10">
+            <img src="media/img/logo.svg" alt="Netflix" class="w-24">
+            <img src="media/img/perfil.jpg" alt="Perfil" class="w-10 h-10 rounded">
+        </nav>
+
+        <!-- Contenido destacado -->
+        <div class="absolute bottom-20 left-10 max-w-lg z-10">
+            <h1 class="text-4xl font-bold">
+                <span class="block" style="font-family: 'Title';">Nuestra historia</span>
+                <span class="block font-sans text-red-500" style="font-family: 'Netflix';">APENAS COMIENZA</span>
+            </h1>
+            
+            <p class="mt-2 text-lg" style="font-family: 'NetflixSans';">
+                La vida nos cruzó, nos unió y nos llevó a escribir un libro de aventuras. <br> Gracias por ser parte de mi historia.
+            </p>
+        
+            <div class="mt-4">
+                <button id="playButton" class="bg-white text-black px-6 py-2 rounded font-bold hover:bg-gray-200 transition duration-300">▶ Reproducir</button>
+                <button id="infoButton" class="bg-gray-700 opacity-80 px-6 py-2 rounded font-bold hover:bg-gray-600 transition duration-300">Más información</button>
+            </div>
+        </div>
+        
+    </div>
+
+
+    <div id="infoModal" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center hidden z-50">
+        <div class="relative w-full max-w-4xl bg-gray-800 rounded-lg p-6">
+
+            <!-- Botón para cerrar -->
+            <button id="closeInfoModal" class="absolute top-4 right-4 z-50">
+                <img src="media/img/cerrar.png" alt="Cerrar" class="w-10 h-10 hover:opacity-80 transition duration-300">
+            </button>
+
+            <!-- Contenedor del trailer -->
+            <div class="trailer mb-6">
+                <div class="flex justify-center">
+                    <video autoplay muted loop class="w-50 rounded-lg">
+                        <source src="media/videos/viaje.mp4" type="video/mp4">
+                        Tu navegador no soporta el video.
+                    </video>
+                </div>
+
+                <!-- Botones de control -->
+                <div class="flex justify-between mt-4">
+                    <button id="playButton" class="bg-white text-black px-6 py-2 rounded font-bold hover:bg-gray-200 transition duration-300 flex items-center">
+                        <span class="mr-2">▶</span>
+                        <span>Reproducir</span>
+                    </button>
+
+                    <div class="flex space-x-4">
+                        <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                            <span class="icon">➕</span>
+                        </button>
+                        <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                            <span class="icon">👍</span>
+                        </button>
+                        <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                            <span class="icon">👎</span>
+                        </button>
+                        <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                            <span class="icon">🔇</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Información de la película/serie -->
+            <div class="info-container">
+                <p class="text-green-500 font-bold">99 % de coincidencia</p>
+                <div class="descripcion mt-2">
+                    <ul class="flex flex-col space-x-4">
+                        <li>2025</li>
+                       
+                        <li>1 temporada</li>
+                        <li>4k</li>
+                    </ul>
+                </div>
+                <div class="topEspana flex items-center mt-2">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-red-500">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3 2C2.44772 2 2 2.44772 2 3V21C2 21.5523 2.44772 22 3 22H21C21.5523 22 22 21.5523 22 21V3C22 2.44772 21.5523 2 21 2H3ZM17.2299 10.8934C16.6125 10.4971 15.8913 10.2996 15.0673 10.2996C14.2444 10.2996 13.5231 10.4971 12.9056 10.8934C12.2881 11.2905 11.8114 11.8536 11.4762 12.5839C11.1411 13.3149 10.9735 14.1695 10.9735 15.1493C10.9735 16.1383 11.1411 16.9957 11.4762 17.7221C11.8114 18.4478 12.2881 19.0091 12.9056 19.4052C13.5231 19.8014 14.2444 20 15.0673 20C15.8913 20 16.6125 19.8014 17.2299 19.4052C17.8475 19.0091 18.3242 18.4478 18.6594 17.7221C18.9945 16.9957 19.1612 16.1383 19.1612 15.1493C19.1612 14.1695 18.9945 13.3149 18.6594 12.5839C18.3242 11.8536 17.8475 11.2905 17.2299 10.8934ZM9.47922 19.7994V10.3263L4.92658 11.4351V13.2656L7.20991 12.6774V19.7994H9.47922ZM13.7606 12.9513C14.0767 12.4298 14.5117 12.1701 15.0673 12.1701C15.6239 12.1701 16.0589 12.4298 16.3751 12.9513C16.6913 13.4718 16.8489 14.2058 16.8489 15.1493C16.8489 16.0938 16.6913 16.8268 16.3751 17.3473C16.0589 17.8688 15.6239 18.1296 15.0673 18.1296C14.5117 18.1296 14.0767 17.8688 13.7606 17.3473C13.4442 16.8268 13.2868 16.0938 13.2868 15.1493C13.2868 14.2058 13.4442 13.4718 13.7606 12.9513ZM13.0737 4.19939C12.7285 4.06677 12.3485 4 11.9344 4C11.5194 4 11.1405 4.06677 10.7952 4.19939C10.4521 4.33122 10.1518 4.51771 9.89848 4.75622C9.64404 4.99367 9.44963 5.27379 9.312 5.59396C9.17437 5.91504 9.10556 6.26299 9.10556 6.63872C9.10556 7.01446 9.17437 7.36241 9.312 7.68349C9.44963 8.00352 9.64404 8.28286 9.89848 8.52136C10.1518 8.75974 10.4521 8.9453 10.7952 9.07792C11.1405 9.20976 11.5194 9.27745 11.9344 9.27745C12.3485 9.27745 12.7285 9.20976 13.0737 9.07792C13.4168 8.9453 13.7161 8.75974 13.9704 8.52136C14.2239 8.28286 14.4194 8.00352 14.557 7.68349C14.6947 7.36241 14.7635 7.01446 14.7635 6.63872C14.7635 6.26299 14.6947 5.91504 14.557 5.59396C14.4194 5.27379 14.2239 4.99367 13.9704 4.75622C13.7161 4.51771 13.4168 4.33122 13.0737 4.19939ZM8.75526 5.30869V4.12288H4V5.30869H5.63894V9.15457H7.11632V5.30869H8.75526ZM18.9904 4.3469C18.6683 4.19847 18.2893 4.12327 17.8484 4.12327H15.5101V9.15392H16.9855V7.70838H17.8484C18.2893 7.70838 18.6683 7.63318 18.9904 7.48384C19.3117 7.33541 19.5601 7.12483 19.7366 6.85484C19.9132 6.58578 20 6.26931 20 5.90845C20 5.55682 19.9132 5.24587 19.7366 4.97602C19.5601 4.70683 19.3117 4.49624 18.9904 4.3469ZM11.2392 5.39166C11.4387 5.27379 11.6701 5.21545 11.9344 5.21545C12.1988 5.21545 12.4302 5.27379 12.6297 5.39166C12.8292 5.50954 12.9849 5.67653 13.0955 5.89001C13.2072 6.10521 13.2632 6.35386 13.2632 6.63872C13.2632 6.92267 13.2072 7.17224 13.0955 7.38651C12.9849 7.60092 12.8292 7.76791 12.6297 7.88565C12.4302 8.00352 12.1988 8.062 11.9344 8.062C11.6701 8.062 11.4387 8.00352 11.2392 7.88565C11.0397 7.76791 10.8841 7.60092 10.7724 7.38651C10.6617 7.17224 10.6057 6.92267 10.6057 6.63872C10.6057 6.35386 10.6617 6.10521 10.7724 5.89001C10.8841 5.67653 11.0397 5.50954 11.2392 5.39166ZM16.9855 5.27195H17.6149C17.9252 5.27195 18.1515 5.32845 18.2913 5.43895C18.4309 5.54931 18.5017 5.70616 18.5017 5.90845C18.5017 6.11535 18.4309 6.27589 18.2913 6.38902C18.1515 6.50228 17.9252 6.55878 17.6149 6.55878H16.9855V5.27195Z" fill="currentColor"></path>
+                    </svg>
+                    <span class="ml-2">N.º 1 En Ecuador hoy</span>
+                </div>
+                <div class="sinopsi mt-4 py-2">
+                    Un encuentro, una mirada, un instante..Y desde entonces, cada momento juntos ha sido único.  
+            No es solo un recuerdo, es el inicio de una historia que seguimos escribiendo, día tras día.  
+           
+                </div>
+            </div>
+
+            <!-- Créditos -->
+            <div class="creditos mt-6">
+                <div>
+                    <span class="font-bold">Reparto:</span>
+                    <a target="_blank" href="https://www.instagram.com/skarlethrosado/" class="hover:underline">Skarleth</a>,
+                    <a target="_blank" href="https://www.instagram.com/diego_ostaiza_/" class="hover:underline">Diego</a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- MODAL DE VIDEO -->
+    <div id="videoModal" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center hidden z-50">
+        <div class="relative w-full max-w-4xl p-4">
+            <!-- Botón para cerrar -->
+            <button id="closeModal" class="absolute top-4 right-4 z-50">
+                <img src="media/img/cerrar.png" alt="Cerrar" class="w-10 h-10 hover:opacity-80 transition duration-300">
+            </button>
+
+            <!-- Video -->
+            <div class="relative w-full h-full">
+                <video id="modalVideo" controls class="w-full rounded-lg">
+                    <source src="media/videos/viaje.mp4" type="video/mp4">
+                    Tu navegador no soporta el video.
+                </video>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL DE VIDEO2 -->
+    <div id="videoModal2" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center hidden z-50">
+        <div class="relative w-full max-w-4xl p-4">
+            <!-- Botón para cerrar -->
+            <button id="closeModal2" class="absolute top-4 right-4 z-50">
+                <img src="media/img/cerrar.png" alt="Cerrar" class="w-10 h-10 hover:opacity-80 transition duration-300">
+            </button>
+
+            <!-- Video -->
+            <div class="relative w-full h-full">
+                <video id="modalVideo2" controls class="w-full rounded-lg">
+                    <source src="media/videos/primeraCitaa.mp4" type="video/mp4">
+                    Tu navegador no soporta el video.
+                </video>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL DE VIDEO3 -->
+    <div id="videoModal3" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center hidden z-50">
+        <div class="relative w-full max-w-4xl p-4">
+            <!-- Botón para cerrar -->
+            <button id="closeModal3" class="absolute top-4 right-4 z-50">
+                <img src="media/img/cerrar.png" alt="Cerrar" class="w-10 h-10 hover:opacity-80 transition duration-300">
+            </button>
+
+            <!-- Video -->
+            <div class="relative w-full h-full">
+                <video id="modalVideo3" controls class="w-full rounded-lg">
+                    <source src="media/videos/torta.mp4" type="video/mp4">
+                    Tu navegador no soporta el video.
+                </video>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL DE VIDEO4 -->
+    <div id="videoModal4" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center hidden z-50">
+        <div class="relative w-full max-w-4xl p-4">
+            <!-- Botón para cerrar -->
+            <button id="closeModal4" class="absolute top-4 right-4 z-50">
+                <img src="media/img/cerrar.png" alt="Cerrar" class="w-10 h-10 hover:opacity-80 transition duration-300">
+            </button>
+
+            <!-- Video -->
+            <div class="relative w-full h-full">
+                <video id="modalVideo4" controls class="w-full rounded-lg">
+                    <source src="media/videos/cumple.mp4" type="video/mp4">
+                    Tu navegador no soporta el video.
+                </video>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL DE VIDEO5 -->
+    <div id="videoModal5" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center hidden z-50">
+        <div class="relative w-full max-w-4xl p-4">
+            <!-- Botón para cerrar -->
+            <button id="closeModal5" class="absolute top-4 right-4 z-50">
+                <img src="media/img/cerrar.png" alt="Cerrar" class="w-10 h-10 hover:opacity-80 transition duration-300">
+            </button>
+
+            <!-- Video -->
+            <div class="relative w-full h-full">
+                <video id="modalVideo5" controls class="w-full rounded-lg">
+                    <source src="media/videos/novios.mp4" type="video/mp4">
+                    Tu navegador no soporta el video.
+                </video>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL DE VIDEO6 -->
+    <div id="videoModal6" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center hidden z-50">
+        <div class="relative w-full max-w-4xl p-4">
+            <!-- Botón para cerrar -->
+            <button id="closeModal6" class="absolute top-4 right-4 z-50">
+                <img src="media/img/cerrar.png" alt="Cerrar" class="w-10 h-10 hover:opacity-80 transition duration-300">
+            </button>
+
+            <!-- Video -->
+            <div class="relative w-full h-full">
+                <video id="modalVideo6" controls class="w-full rounded-lg">
+                    <source src="media/videos/sanValentin.mp4" type="video/mp4">
+                    Tu navegador no soporta el video.
+                </video>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL DE VIDEO7 -->
+    <div id="videoModal7" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center hidden z-50">
+        <div class="relative w-full max-w-4xl p-4">
+            <!-- Botón para cerrar -->
+            <button id="closeModal7" class="absolute top-4 right-4 z-50">
+                <img src="media/img/cerrar.png" alt="Cerrar" class="w-10 h-10 hover:opacity-80 transition duration-300">
+            </button>
+
+            <!-- Video -->
+            <div class="relative w-full h-full">
+                <video id="modalVideo7" controls class="w-full rounded-lg">
+                    <source src="media/videos/comida.mp4" type="video/mp4">
+                    Tu navegador no soporta el video.
+                </video>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Sección "Popular On Netflix" -->
+    <div class="mt-10 px-6">
+        <h2 class="text-2xl font-bold mb-4">Nuestros Mejores Momentos</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 border-2">
+            <!-- Imagen con evento de clic -->
+            <img src="media/img/primeraCita.jpeg" alt="Movie 1" 
+                class="w-full h-40 object-cover rounded-md hover:scale-105 transition duration-300 cursor-pointer" 
+                onclick="openInfoModal()">
+            
+            <img src="media/img/torta.jpeg" alt="Movie 2" 
+                class="w-full h-40 object-cover rounded-md hover:scale-105 transition duration-300 cursor-pointer" 
+                onclick="openInfoModal2()">
+
+            <img src="media/img/cumple.jpeg" alt="Movie 3" 
+                class="w-full h-40 object-cover rounded-md hover:scale-105 transition duration-300 cursor-pointer" 
+                onclick="openInfoModal3()">
+
+            <img src="media/img/novios.jpeg" alt="Movie 4" 
+                class="w-full h-40 object-cover rounded-md hover:scale-105 transition duration-300 cursor-pointer" 
+                onclick="openInfoModal4()">
+
+            <img src="media/img/sanValentin.jpeg" alt="Movie 5" 
+                class="w-full h-40 object-cover rounded-md hover:scale-105 transition duration-300 cursor-pointer" 
+                onclick="openInfoModal5()">
+
+            <img src="media/img/comida.jpeg" alt="Movie 6" 
+                class="w-full h-40 object-cover rounded-md hover:scale-105 transition duration-300 cursor-pointer" 
+                onclick="openInfoModal6()">
+        </div>
+    </div>
+    
+
+    <!-- Modal de cita -->
+    <div id="infoModal2" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center hidden z-50">
+        <div class="relative w-full max-w-4xl bg-gray-800 rounded-lg p-6">
+
+            <!-- Botón para cerrar -->
+            <button id="closeInfoModal2" class="absolute top-4 right-4 z-50">
+                <img src="media/img/cerrar.png" alt="Cerrar" class="w-10 h-10 hover:opacity-80 transition duration-300">
+            </button>
+
+            <!-- Contenedor del trailer -->
+            <div class="trailer mb-6">
+                <div class="flex justify-center">
+                    <video autoplay muted loop class="w-90 rounded-lg">
+                        <source src="media/videos/primeraCitaa.mp4" type="video/mp4">
+                        Tu navegador no soporta el video.
+                    </video>
+                </div>
+
+                <!-- Botones de control -->
+                <div class="flex justify-between mt-4">
+                    <button id="playButton2" class="bg-white text-black px-6 py-2 rounded font-bold hover:bg-gray-200 transition duration-300 flex items-center">
+                        <span class="mr-2">▶</span>
+                        <span>Reproducir</span>
+                    </button>
+
+                    <div class="flex space-x-4">
+                        <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                            <span class="icon">➕</span>
+                        </button>
+                        <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                            <span class="icon">👍</span>
+                        </button>
+                        <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                            <span class="icon">👎</span>
+                        </button>
+                        <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                            <span class="icon">🔇</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Información de la película/serie -->
+            <div class="info-container">
+                <p class="text-green-500 font-bold">100 % de felicidad</p>
+               
+                <div class="topEspana flex items-center mt-2">
+                   
+                    <span class="ml-2 font-bold">04/12/2024 Nuestra primera cita</span>
+                </div>
+                <div class="sinopsi mt-4 py-2">
+                    Quién diría que aquella salida se convertiría en unos de mis recuerdo favorito en donde puedo afirmar con mucha seguridad que tuve una cita con la chica más hermosa del mundo.
+                </div>
+            </div>
+
+            <!-- Créditos -->
+            <div class="creditos mt-9">
+                <div>
+                    <span class="font-bold mt-5">Reparto:</span>
+                    <a target="_blank" href="https://www.instagram.com/skarlethrosado/" class="hover:underline">Skarleth</a>,
+                    <a target="_blank" href="https://www.instagram.com/diego_ostaiza_/" class="hover:underline">Diego</a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+
+
+ <!-- Modal de torta -->
+ <div id="infoModal3" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center hidden z-50">
+    <div class="relative w-full max-w-4xl bg-gray-800 rounded-lg p-6">
+
+        <!-- Botón para cerrar -->
+        <button id="closeInfoModal3" class="absolute top-4 right-4 z-50">
+            <img src="media/img/cerrar.png" alt="Cerrar" class="w-10 h-10 hover:opacity-80 transition duration-300">
+        </button>
+
+        <!-- Contenedor del trailer -->
+        <div class="trailer mb-6">
+            <div class="flex justify-center">
+                <video autoplay muted loop class="w-90 rounded-lg">
+                    <source src="media/videos/torta.mp4" type="video/mp4">
+                    Tu navegador no soporta el video.
+                </video>
+            </div>
+
+            <!-- Botones de control -->
+            <div class="flex justify-between mt-4">
+                <button id="playButton3" class="bg-white text-black px-6 py-2 rounded font-bold hover:bg-gray-200 transition duration-300 flex items-center">
+                    <span class="mr-2">▶</span>
+                    <span>Reproducir</span>
+                </button>
+
+                <div class="flex space-x-4">
+                    <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                        <span class="icon">➕</span>
+                    </button>
+                    <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                        <span class="icon">👍</span>
+                    </button>
+                    <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                        <span class="icon">👎</span>
+                    </button>
+                    <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                        <span class="icon">🔇</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Información de la película/serie -->
+        <div class="info-container">
+            <p class="text-green-500 font-bold">100 % de felicidad</p>
+           
+            <div class="topEspana flex items-center mt-2">
+               
+                <span class="ml-2 font-bold">El día que hicimos nuestro primer postre juntos</span>
+            </div>
+            <div class="sinopsi mt-4 py-2">
+                Nuestro primer intento en hacer un postre y terminamos haciendo la mejor torta de chocolate que he comido nunca. Por mas recuerdos cocinando a su lado.
+            </div>
+        </div>
+
+        <!-- Créditos -->
+        <div class="creditos mt-9 py-5">
+            <div>
+                <span class="font-bold mt-5">Reparto:</span>
+                <a target="_blank" href="https://www.instagram.com/skarlethrosado/" class="hover:underline">Skarleth</a>,
+                <a target="_blank" href="https://www.instagram.com/diego_ostaiza_/" class="hover:underline">Diego</a>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<!-- Modal de cumple -->
+<div id="infoModal4" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center hidden z-50">
+    <div class="relative w-full max-w-4xl bg-gray-800 rounded-lg p-6">
+
+        <!-- Botón para cerrar -->
+        <button id="closeInfoModal4" class="absolute top-4 right-4 z-50">
+            <img src="media/img/cerrar.png" alt="Cerrar" class="w-10 h-10 hover:opacity-80 transition duration-300">
+        </button>
+
+        <!-- Contenedor del trailer -->
+        <div class="trailer mb-6">
+            <div class="flex justify-center">
+                <video autoplay muted loop class="w-20 rounded-lg">
+                    <source src="media/videos/cumple.mp4" type="video/mp4">
+                    Tu navegador no soporta el video.
+                </video>
+            </div>
+
+            <!-- Botones de control -->
+            <div class="flex justify-between mt-4">
+                <button id="playButton4" class="bg-white text-black px-6 py-2 rounded font-bold hover:bg-gray-200 transition duration-300 flex items-center">
+                    <span class="mr-2">▶</span>
+                    <span>Reproducir</span>
+                </button>
+
+                <div class="flex space-x-4">
+                    <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                        <span class="icon">➕</span>
+                    </button>
+                    <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                        <span class="icon">👍</span>
+                    </button>
+                    <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                        <span class="icon">👎</span>
+                    </button>
+                    <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                        <span class="icon">🔇</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Información de la película/serie -->
+        <div class="info-container">
+           
+           
+            <div class="topEspana flex items-center mt-2">
+               
+                <span class="ml-2 font-bold">El día del cumpleaños de mi amada</span>
+            </div>
+            <div class="sinopsi mt-4 py-5">
+                El día más especial para la persona más especial de mi vida. Que lindo fué verla sonreír, y sobre todo poder hacerte sentir lo increíble que eres.
+            </div>
+        </div>
+
+        <!-- Créditos -->
+        <div class="creditos mt-9">
+            <div>
+                <span class="font-bold mt-5">Reparto:</span>
+                <a target="_blank" href="https://www.instagram.com/skarlethrosado/" class="hover:underline">Skarleth</a>,
+                <a target="_blank" href="https://www.instagram.com/diego_ostaiza_/" class="hover:underline">Diego</a>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<!-- Modal de novios -->
+<div id="infoModal5" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center hidden z-50">
+    <div class="relative w-full max-w-4xl bg-gray-800 rounded-lg p-6">
+
+        <!-- Botón para cerrar -->
+        <button id="closeInfoModal5" class="absolute top-4 right-4 z-50">
+            <img src="media/img/cerrar.png" alt="Cerrar" class="w-10 h-10 hover:opacity-80 transition duration-300">
+        </button>
+
+        <!-- Contenedor del trailer -->
+        <div class="trailer mb-6">
+            <div class="flex justify-center">
+                <video autoplay muted loop class="w-90 rounded-lg">
+                    <source src="media/videos/novios.mp4" type="video/mp4">
+                    Tu navegador no soporta el video.
+                </video>
+            </div>
+
+            <!-- Botones de control -->
+            <div class="flex justify-between mt-4">
+                <button id="playButton5" class="bg-white text-black px-6 py-2 rounded font-bold hover:bg-gray-200 transition duration-300 flex items-center">
+                    <span class="mr-2">▶</span>
+                    <span>Reproducir</span>
+                </button>
+
+                <div class="flex space-x-4">
+                    <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                        <span class="icon">➕</span>
+                    </button>
+                    <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                        <span class="icon">👍</span>
+                    </button>
+                    <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                        <span class="icon">👎</span>
+                    </button>
+                    <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                        <span class="icon">🔇</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Información de la película/serie -->
+        <div class="info-container pb-5">
+            <p class="text-green-500 font-bold">100 % de felicidad</p>
+           
+            <div class="topEspana flex items-center mt-2">
+               
+                <span class="ml-2 font-bold">Mi día favorito</span>
+            </div>
+            <div class="sinopsi mt-4 py-5">
+                Desde el momento en que la ví, supe que se convertiria en alguien especial, aquel día en donde firmamos estar juntos y 
+                compartir muchos momentos a su lado me he sentido el chico más feliz del mundo por tener a mi lado a la chica de mis sueños. 
+
+            </div>
+        </div>
+
+        <!-- Créditos -->
+        <div class="creditos mt-9 py-5">
+            <div>
+                <span class="font-bold mt-5 py-5">Reparto:</span>
+                <a target="_blank" href="https://www.instagram.com/skarlethrosado/" class="hover:underline">Skarleth</a>,
+                <a target="_blank" href="https://www.instagram.com/diego_ostaiza_/" class="hover:underline">Diego</a>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<!-- Modal de san valentin -->
+<div id="infoModal6" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center hidden z-50">
+    <div class="relative w-full max-w-4xl bg-gray-800 rounded-lg p-6">
+
+        <!-- Botón para cerrar -->
+        <button id="closeInfoModal6" class="absolute top-4 right-4 z-50">
+            <img src="media/img/cerrar.png" alt="Cerrar" class="w-10 h-10 hover:opacity-80 transition duration-300">
+        </button>
+
+        <!-- Contenedor del trailer -->
+        <div class="trailer mb-6">
+            <div class="flex justify-center">
+                <video autoplay muted loop class="w-90 rounded-lg">
+                    <source src="media/videos/sanValentin.mp4" type="video/mp4">
+                    Tu navegador no soporta el video.
+                </video>
+            </div>
+
+            <!-- Botones de control -->
+            <div class="flex justify-between mt-4">
+                <button id="playButton6" class="bg-white text-black px-6 py-2 rounded font-bold hover:bg-gray-200 transition duration-300 flex items-center">
+                    <span class="mr-2">▶</span>
+                    <span>Reproducir</span>
+                </button>
+
+                <div class="flex space-x-4">
+                    <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                        <span class="icon">➕</span>
+                    </button>
+                    <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                        <span class="icon">👍</span>
+                    </button>
+                    <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                        <span class="icon">👎</span>
+                    </button>
+                    <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                        <span class="icon">🔇</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Información de la película/serie -->
+        <div class="info-container">
+            <p class="text-green-500 font-bold">100 % de felicidad</p>
+           
+            <div class="topEspana flex items-center mt-2">
+               
+                <span class="ml-2 font-bold">Nuestro primer San Valentín</span>
+            </div>
+            <div class="sinopsi mt-4">
+                Nuestro primer San Valentín juntos en donde su presencia es y siempre será el mejor regalo que podré tener.
+            </div>
+        </div>
+
+        <!-- Créditos -->
+        <div class="creditos mt-9 py-5">
+            <div>
+                <span class="font-bold mt-5">Reparto:</span>
+                <a target="_blank" href="https://www.instagram.com/skarlethrosado/" class="hover:underline">Skarleth</a>,
+                <a target="_blank" href="https://www.instagram.com/diego_ostaiza_/" class="hover:underline">Diego</a>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<!-- Modal de salidas -->
+<div id="infoModal7" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center hidden z-50 ">
+    <div class="relative w-full max-w-4xl bg-gray-800 rounded-lg p-6">
+
+        <!-- Botón para cerrar -->
+        <button id="closeInfoModal7" class="absolute top-4 right-4 z-50">
+            <img src="media/img/cerrar.png" alt="Cerrar" class="w-10 h-10 hover:opacity-80 transition duration-300">
+        </button>
+
+        <!-- Contenedor del trailer -->
+        <div class="trailer mb-6">
+            <div class="flex justify-center">
+                <video autoplay muted loop class="w-90 rounded-lg">
+                    <source src="media/videos/comida.mp4" type="video/mp4">
+                    Tu navegador no soporta el video.
+                </video>
+            </div>
+
+            <!-- Botones de control -->
+            <div class="flex justify-between mt-4">
+                <button id="playButton7" class="bg-white text-black px-6 py-2 rounded font-bold hover:bg-gray-200 transition duration-300 flex items-center">
+                    <span class="mr-2">▶</span>
+                    <span>Reproducir</span>
+                </button>
+
+                <div class="flex space-x-4">
+                    <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                        <span class="icon">➕</span>
+                    </button>
+                    <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                        <span class="icon">👍</span>
+                    </button>
+                    <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                        <span class="icon">👎</span>
+                    </button>
+                    <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                        <span class="icon">🔇</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Información de la película/serie -->
+        <div class="info-container">
+            <p class="text-green-500 font-bold">100 % de felicidad</p>
+           
+            <div class="topEspana flex items-center mt-2">
+               
+                <span class="ml-2 font-bold">Nuestras salida a comer</span>
+            </div>
+            <div class="sinopsi mt-4">
+                Cada vez que salimos a comer lo que más disfruto es pasar a su lado , me quedo admirando su hermosura siempre,
+                por ello soy el ultimo en terminar la comida, lo que sucede es que eres irresistible mi amor .
+            </div>
+        </div>
+
+        <!-- Créditos -->
+        <div class="creditos mt-9">
+            <div>
+                <span class="font-bold mt-5">Reparto:</span>
+                <a target="_blank" href="https://www.instagram.com/skarlethrosado/" class="hover:underline">Skarleth</a>,
+                <a target="_blank" href="https://www.instagram.com/diego_ostaiza_/" class="hover:underline">Diego</a>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+ <!-- Sección "Popular On Netflix" -->
+ <div class="mt-12 px-6">
+    <h2 class="text-2xl font-bold mb-4 text-white mt-50">Fotos para el recuerdo</h2> 
+
+    <!-- Contenedor del Slider -->
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            <!-- Foto 1 -->
+            <div class="swiper-slide">
+                
+                    <img class="object-cover w-full rounded-lg h-96" src="media/img/f1.jpeg" alt="">  
+                
+            </div>
+
+            <!-- Foto 2 -->
+            <div class="swiper-slide">
+                
+                    <img class="object-cover w-full rounded-lg h-96" src="media/img/f2.jpeg" alt="">  
+                
+            </div>
+
+            <!-- Foto 3 -->
+            <div class="swiper-slide">
+                
+                    <img class="object-cover w-full rounded-lg h-96" src="media/img/f3.jpeg" alt="">  
+              
+            </div>
+
+            <!-- Foto 4 -->
+            <div class="swiper-slide">
+               
+                    <img class="object-cover w-full rounded-lg h-96" src="media/img/f4.jpeg" alt="">  
+              
+            </div>
+        </div>
+
+        <!-- Botones de navegación -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+
+        <!-- Paginación -->
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+
+
+
+<div class="mt-10 px-6">
+    <h2 class="text-2xl font-bold mb-4">Detalles</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 border-2">
+        <!-- Imagen con evento de clic -->
+        <img src="media/img/f6.jpeg" alt="Movie 1" 
+            class="w-full h-40 object-cover rounded-md hover:scale-105 transition duration-300 cursor-pointer" 
+            >
+        <img src="media/img/f7.jpeg" alt="Movie 1" 
+            class="w-full h-40 object-cover rounded-md hover:scale-105 transition duration-300 cursor-pointer" 
+            >
+        <img src="media/img/r4.jpeg" alt="Movie 1" 
+            class="w-full h-40 object-cover rounded-md hover:scale-105 transition duration-300 cursor-pointer" 
+            >
+        <img src="media/img/r3.jpeg" alt="Movie 1" 
+            class="w-full h-40 object-cover rounded-md hover:scale-105 transition duration-300 cursor-pointer" 
+            >
+        
+        
+    </div>
+</div>
+
+
+<div class="mt-10 px-6">
+    <h2 class="text-2xl font-bold mb-4">Gracias por acompañarme siempre</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 border-2">
+        <!-- Imagen con evento de clic -->
+        <img src="media/img/g1.jpeg" alt="Movie 1" 
+            class="w-full h-40 object-cover rounded-md hover:scale-105 transition duration-300 cursor-pointer" 
+            >
+        <img src="media/img/g2.jpeg" alt="Movie 1" 
+            class="w-full h-40 object-cover rounded-md hover:scale-105 transition duration-300 cursor-pointer" 
+            >
+        <img src="media/img/g3.jpeg" alt="Movie 1" 
+            class="w-full h-40 object-cover rounded-md hover:scale-105 transition duration-300 cursor-pointer" 
+            >
+        <img src="media/img/g4.jpeg" alt="Movie 1" 
+            class="w-full h-40 object-cover rounded-md hover:scale-105 transition duration-300 cursor-pointer" 
+            >    
+    </div>
+</div>
+
+
+<div class="mt-10 px-6 mb-12" > <!-- Aumenté la separación aquí -->
+    <h2 class="text-2xl font-bold mb-4">Regalos Digitales</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 border-2 mb-5 mt-5">
+        <!-- Imagen con evento de clic -->
+        <a href="https://www.canva.com/design/DAGfl5PHgPU/V9uWvQXUSAd1rV1LTxFzyg/view?utm_content=DAGfl5PHgPU&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hc2d54a3dd6" target="_blank">
+            <img src="media/img/d2.jpeg" alt="Movie 1" 
+            class="w-full h-40 object-cover rounded-md hover:scale-105 transition duration-300 cursor-pointer" 
+            >
+        </a>
+        <a href="https://skarleth.vercel.app/" target="_blank">
+            <img src="media/img/d1.jpeg" alt="Movie 1" 
+            class="w-full h-40 object-cover rounded-md hover:scale-105 transition duration-300 cursor-pointer" 
+            >
+        </a>
+    </div>
+</div>
+<div class="mt-10 px-6 mb-12" > <!-- Aumenté la separación aquí -->
+</div>
+
+<!-- Fondo con imagen -->
+<div class=" relative w-full h-screen bg-cover bg-center" style="background-image: url('media/img/bg2.jpeg');">
+    <!-- Contenido destacado -->
+    <div class="absolute bottom-20 left-10 max-w-lg z-10">
+        <h1 class="text-4xl font-bold">
+            <span class="block" style="font-family: 'Title';">Ella</span>
+            <span class="block font-sans text-red-500" style="font-family: 'Netflix';">La princesita de mi cuento</span>
+        </h1>
+        
+        <p class="mt-2 text-lg" style="font-family: 'NetflixSans';">
+           La chica más espectacular , brillante , hermosa , divina que ha logrado pisar este planeta.
+        </p>
+
+        <div class="mt-4">
+            <button id="playButton11" class="bg-white text-black px-6 py-2 rounded font-bold hover:bg-gray-200 transition duration-300">▶ Reproducir</button>
+            <button id="infoButton11" class="bg-gray-700 opacity-80 px-6 py-2 rounded font-bold hover:bg-gray-600 transition duration-300">Más información</button>
+        </div>
+    </div>
+</div>
+<div id="infoModal11" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center hidden z-50">
+    <div class="relative w-full max-w-4xl bg-gray-800 rounded-lg p-6">
+
+        <!-- Botón para cerrar -->
+        <button id="closeInfoModal11" class="absolute top-4 right-4 z-50">
+            <img src="media/img/cerrar.png" alt="Cerrar" class="w-10 h-10 hover:opacity-80 transition duration-300">
+        </button>
+
+        <!-- Contenedor del trailer -->
+        <div class="trailer mb-6">
+            <div class="flex justify-center">
+                <video autoplay muted loop class="w-50 rounded-lg">
+                    <source src="media/videos/video2.mp4" type="video/mp4">
+                    Tu navegador no soporta el video.
+                </video>
+            </div>
+
+            <!-- Botones de control -->
+            <div class="flex justify-between mt-4">
+                <button id="playButton11" class="bg-white text-black px-6 py-2 rounded font-bold hover:bg-gray-200 transition duration-300 flex items-center">
+                    <span class="mr-2">▶</span>
+                    <span>Reproducir</span>
+                </button>
+
+                <div class="flex space-x-4">
+                    <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                        <span class="icon">➕</span>
+                    </button>
+                    <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                        <span class="icon">👍</span>
+                    </button>
+                    <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                        <span class="icon">👎</span>
+                    </button>
+                    <button class="bg-gray-700 opacity-80 px-4 py-2 rounded hover:bg-gray-600 transition duration-300">
+                        <span class="icon">🔇</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Información de la película/serie -->
+        <div class="info-container">
+            <p class="text-green-500 font-bold">100 % de coincidencia</p>
+            <div class="descripcion mt-2">
+                <ul class="flex flex-col space-x-4">
+                    <li>2025</li>
+                   
+                    <li>1 temporada</li>
+                    <li>4k</li>
+                </ul>
+            </div>
+            <div class="topEspana flex items-center mt-2">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-red-500">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3 2C2.44772 2 2 2.44772 2 3V21C2 21.5523 2.44772 22 3 22H21C21.5523 22 22 21.5523 22 21V3C22 2.44772 21.5523 2 21 2H3ZM17.2299 10.8934C16.6125 10.4971 15.8913 10.2996 15.0673 10.2996C14.2444 10.2996 13.5231 10.4971 12.9056 10.8934C12.2881 11.2905 11.8114 11.8536 11.4762 12.5839C11.1411 13.3149 10.9735 14.1695 10.9735 15.1493C10.9735 16.1383 11.1411 16.9957 11.4762 17.7221C11.8114 18.4478 12.2881 19.0091 12.9056 19.4052C13.5231 19.8014 14.2444 20 15.0673 20C15.8913 20 16.6125 19.8014 17.2299 19.4052C17.8475 19.0091 18.3242 18.4478 18.6594 17.7221C18.9945 16.9957 19.1612 16.1383 19.1612 15.1493C19.1612 14.1695 18.9945 13.3149 18.6594 12.5839C18.3242 11.8536 17.8475 11.2905 17.2299 10.8934ZM9.47922 19.7994V10.3263L4.92658 11.4351V13.2656L7.20991 12.6774V19.7994H9.47922ZM13.7606 12.9513C14.0767 12.4298 14.5117 12.1701 15.0673 12.1701C15.6239 12.1701 16.0589 12.4298 16.3751 12.9513C16.6913 13.4718 16.8489 14.2058 16.8489 15.1493C16.8489 16.0938 16.6913 16.8268 16.3751 17.3473C16.0589 17.8688 15.6239 18.1296 15.0673 18.1296C14.5117 18.1296 14.0767 17.8688 13.7606 17.3473C13.4442 16.8268 13.2868 16.0938 13.2868 15.1493C13.2868 14.2058 13.4442 13.4718 13.7606 12.9513ZM13.0737 4.19939C12.7285 4.06677 12.3485 4 11.9344 4C11.5194 4 11.1405 4.06677 10.7952 4.19939C10.4521 4.33122 10.1518 4.51771 9.89848 4.75622C9.64404 4.99367 9.44963 5.27379 9.312 5.59396C9.17437 5.91504 9.10556 6.26299 9.10556 6.63872C9.10556 7.01446 9.17437 7.36241 9.312 7.68349C9.44963 8.00352 9.64404 8.28286 9.89848 8.52136C10.1518 8.75974 10.4521 8.9453 10.7952 9.07792C11.1405 9.20976 11.5194 9.27745 11.9344 9.27745C12.3485 9.27745 12.7285 9.20976 13.0737 9.07792C13.4168 8.9453 13.7161 8.75974 13.9704 8.52136C14.2239 8.28286 14.4194 8.00352 14.557 7.68349C14.6947 7.36241 14.7635 7.01446 14.7635 6.63872C14.7635 6.26299 14.6947 5.91504 14.557 5.59396C14.4194 5.27379 14.2239 4.99367 13.9704 4.75622C13.7161 4.51771 13.4168 4.33122 13.0737 4.19939ZM8.75526 5.30869V4.12288H4V5.30869H5.63894V9.15457H7.11632V5.30869H8.75526ZM18.9904 4.3469C18.6683 4.19847 18.2893 4.12327 17.8484 4.12327H15.5101V9.15392H16.9855V7.70838H17.8484C18.2893 7.70838 18.6683 7.63318 18.9904 7.48384C19.3117 7.33541 19.5601 7.12483 19.7366 6.85484C19.9132 6.58578 20 6.26931 20 5.90845C20 5.55682 19.9132 5.24587 19.7366 4.97602C19.5601 4.70683 19.3117 4.49624 18.9904 4.3469ZM11.2392 5.39166C11.4387 5.27379 11.6701 5.21545 11.9344 5.21545C12.1988 5.21545 12.4302 5.27379 12.6297 5.39166C12.8292 5.50954 12.9849 5.67653 13.0955 5.89001C13.2072 6.10521 13.2632 6.35386 13.2632 6.63872C13.2632 6.92267 13.2072 7.17224 13.0955 7.38651C12.9849 7.60092 12.8292 7.76791 12.6297 7.88565C12.4302 8.00352 12.1988 8.062 11.9344 8.062C11.6701 8.062 11.4387 8.00352 11.2392 7.88565C11.0397 7.76791 10.8841 7.60092 10.7724 7.38651C10.6617 7.17224 10.6057 6.92267 10.6057 6.63872C10.6057 6.35386 10.6617 6.10521 10.7724 5.89001C10.8841 5.67653 11.0397 5.50954 11.2392 5.39166ZM16.9855 5.27195H17.6149C17.9252 5.27195 18.1515 5.32845 18.2913 5.43895C18.4309 5.54931 18.5017 5.70616 18.5017 5.90845C18.5017 6.11535 18.4309 6.27589 18.2913 6.38902C18.1515 6.50228 17.9252 6.55878 17.6149 6.55878H16.9855V5.27195Z" fill="currentColor"></path>
+                </svg>
+                <span class="ml-2">N.º 1 En Ecuador hoy</span>
+            </div>
+            <div class="sinopsi mt-4">
+                Cada historia tiene a su protagonista, pero la mía tiene a una princesita como usted, cada vez que la veo me doy cuenta de lo afortunado que soy en tener a tan preciosa y perfecta chica en mi vida.
+            </div>
+        </div>
+
+        <!-- Créditos -->
+        <div class="creditos mt-6">
+            <div>
+                <span class="font-bold">Reparto:</span>
+                <a target="_blank" href="https://www.instagram.com/skarlethrosado/" class="hover:underline">Skarleth</a>,
+                <a target="_blank" href="https://www.instagram.com/diego_ostaiza_/" class="hover:underline">Diego</a>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+<div id="videoModal11" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center hidden z-50">
+    <div class="relative w-full max-w-4xl p-4">
+        <!-- Botón para cerrar -->
+        <button id="closeModal11" class="absolute top-4 right-4 z-50">
+            <img src="media/img/cerrar.png" alt="Cerrar" class="w-10 h-10 hover:opacity-80 transition duration-300">
+        </button>
+
+        <!-- Video -->
+        <div class="relative w-full h-full">
+            <video id="modalVideo11" controls class="w-full rounded-lg">
+                <source src="media/videos/video2.mp4" type="video/mp4">
+                Tu navegador no soporta el video.
+            </video>
+        </div>
+    </div>
+</div>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const playButton = document.getElementById("playButton");
+            const videoModal = document.getElementById("videoModal");
+            const closeModal = document.getElementById("closeModal");
+            const modalVideo = document.getElementById("modalVideo");
+        
+            if (playButton) {
+                playButton.addEventListener("click", () => {
+                    videoModal.classList.remove("hidden");
+                    modalVideo.play();
+                });
+            }
+        
+            if (closeModal) {
+                closeModal.addEventListener("click", closeVideoModal);
+                closeModal.addEventListener("touchstart", closeVideoModal); // Para móviles
+            }
+        
+            function closeVideoModal() {
+                videoModal.classList.add("hidden");
+                modalVideo.pause();
+                modalVideo.currentTime = 0; // Reinicia el video
+            }
+        
+            // Cierra la modal al hacer clic fuera del video
+            videoModal.addEventListener("click", (e) => {
+                if (e.target === videoModal) {
+                    closeVideoModal();
+                }
+            });
+
+            // Pausar/Reproducir al hacer clic en el video
+            modalVideo.addEventListener("click", () => {
+                if (modalVideo.paused) {
+                    modalVideo.play();
+                } else {
+                    modalVideo.pause();
+                }
+            });
+        });
+       
+        document.addEventListener("DOMContentLoaded", function() {
+            const infoButton = document.getElementById("infoButton");
+            const infoModal = document.getElementById("infoModal");
+            const closeInfoModal = document.getElementById("closeInfoModal");
+
+            if (infoButton) {
+                infoButton.addEventListener("click", () => {
+                    infoModal.classList.remove("hidden");
+                });
+            }
+
+            if (closeInfoModal) {
+                closeInfoModal.addEventListener("click", () => {
+                    infoModal.classList.add("hidden");
+                });
+            }
+        });
+        
+
+
+
+/// video cita 
+document.addEventListener("DOMContentLoaded", function() {
+    const playButton2 = document.getElementById("playButton2");
+    const infoModal2 = document.getElementById("infoModal2");
+    const videoModal2 = document.getElementById("videoModal2");
+    const closeInfoModal2 = document.getElementById("closeInfoModal2");
+    const closeModal = document.getElementById("closeModal2");
+    const modalVideo2 = document.getElementById("modalVideo2");
+
+    // Abre el modal con video y cierra el modal actual (infoModal2)
+    if (playButton2) {
+        playButton2.addEventListener("click", () => {
+            infoModal2.classList.add("hidden"); // Cierra el modal actual
+            videoModal2.classList.remove("hidden"); // Muestra el modal del video
+            modalVideo2.play(); // Reproduce el video
+        });
+    }
+
+    // Cierra el modal de información al hacer clic en el botón de cerrar
+    if (closeInfoModal2) {
+        closeInfoModal2.addEventListener("click", () => {
+            infoModal2.classList.add("hidden");
+        });
+    }
+
+    // Cierra el modal de video al hacer clic en el botón de cerrar
+    if (closeModal) {
+        closeModal.addEventListener("click", closeVideoModal);
+        closeModal.addEventListener("touchstart", closeVideoModal); // Para móviles
+    }
+
+    // Función para cerrar el modal de video
+    function closeVideoModal() {
+        videoModal2.classList.add("hidden"); // Oculta el modal de video
+        modalVideo2.pause(); // Pausa el video
+        modalVideo2.currentTime = 0; // Reinicia el video
+    }
+
+    // Cierra el modal de video al hacer clic fuera del video
+    videoModal2.addEventListener("click", (e) => {
+        if (e.target === videoModal2) {
+            closeVideoModal();
+        }
+    });
+
+    // Pausar/Reproducir al hacer clic en el video
+    modalVideo2.addEventListener("click", () => {
+        if (modalVideo2.paused) {
+            modalVideo2.play(); // Reproduce el video
+        } else {
+            modalVideo2.pause(); // Pausa el video
+        }
+    });
+});
+
+
+
+
+/// video torta 
+document.addEventListener("DOMContentLoaded", function() {
+    const playButton3 = document.getElementById("playButton3");
+    const infoModal3 = document.getElementById("infoModal3");
+    const videoModal3 = document.getElementById("videoModal3");
+    const closeInfoModal3 = document.getElementById("closeInfoModal3");
+    const closeModal = document.getElementById("closeModal3");
+    const modalVideo3 = document.getElementById("modalVideo3");
+
+    // Abre el modal con video y cierra el modal actual (infoModal2)
+    if (playButton3) {
+        playButton3.addEventListener("click", () => {
+            infoModal3.classList.add("hidden"); // Cierra el modal actual
+            videoModal3.classList.remove("hidden"); // Muestra el modal del video
+            modalVideo3.play(); // Reproduce el video
+        });
+    }
+
+    // Cierra el modal de información al hacer clic en el botón de cerrar
+    if (closeInfoModal3) {
+        closeInfoModal3.addEventListener("click", () => {
+            infoModal3.classList.add("hidden");
+        });
+    }
+
+    // Cierra el modal de video al hacer clic en el botón de cerrar
+    if (closeModal) {
+        closeModal.addEventListener("click", closeVideoModal);
+        closeModal.addEventListener("touchstart", closeVideoModal); // Para móviles
+    }
+
+    // Función para cerrar el modal de video
+    function closeVideoModal() {
+        videoModal3.classList.add("hidden"); // Oculta el modal de video
+        modalVideo3.pause(); // Pausa el video
+        modalVideo3.currentTime = 0; // Reinicia el video
+    }
+
+    // Cierra el modal de video al hacer clic fuera del video
+    videoModal3.addEventListener("click", (e) => {
+        if (e.target === videoModal3) {
+            closeVideoModal();
+        }
+    });
+
+    // Pausar/Reproducir al hacer clic en el video
+    modalVideo3.addEventListener("click", () => {
+        if (modalVideo3.paused) {
+            modalVideo3.play(); // Reproduce el video
+        } else {
+            modalVideo3.pause(); // Pausa el video
+        }
+    });
+});
+
+
+
+
+/// video cumple 
+document.addEventListener("DOMContentLoaded", function() {
+    const playButton3 = document.getElementById("playButton4");
+    const infoModal3 = document.getElementById("infoModal4");
+    const videoModal3 = document.getElementById("videoModal4");
+    const closeInfoModal3 = document.getElementById("closeInfoModal4");
+    const closeModal = document.getElementById("closeModal4");
+    const modalVideo3 = document.getElementById("modalVideo4");
+
+    // Abre el modal con video y cierra el modal actual (infoModal2)
+    if (playButton3) {
+        playButton3.addEventListener("click", () => {
+            infoModal3.classList.add("hidden"); // Cierra el modal actual
+            videoModal3.classList.remove("hidden"); // Muestra el modal del video
+            modalVideo3.play(); // Reproduce el video
+        });
+    }
+
+    // Cierra el modal de información al hacer clic en el botón de cerrar
+    if (closeInfoModal3) {
+        closeInfoModal3.addEventListener("click", () => {
+            infoModal3.classList.add("hidden");
+        });
+    }
+
+    // Cierra el modal de video al hacer clic en el botón de cerrar
+    if (closeModal) {
+        closeModal.addEventListener("click", closeVideoModal);
+        closeModal.addEventListener("touchstart", closeVideoModal); // Para móviles
+    }
+
+    // Función para cerrar el modal de video
+    function closeVideoModal() {
+        videoModal3.classList.add("hidden"); // Oculta el modal de video
+        modalVideo3.pause(); // Pausa el video
+        modalVideo3.currentTime = 0; // Reinicia el video
+    }
+
+    // Cierra el modal de video al hacer clic fuera del video
+    videoModal3.addEventListener("click", (e) => {
+        if (e.target === videoModal3) {
+            closeVideoModal();
+        }
+    });
+
+    // Pausar/Reproducir al hacer clic en el video
+    modalVideo3.addEventListener("click", () => {
+        if (modalVideo3.paused) {
+            modalVideo3.play(); // Reproduce el video
+        } else {
+            modalVideo3.pause(); // Pausa el video
+        }
+    });
+});
+
+
+/// video novio 
+document.addEventListener("DOMContentLoaded", function() {
+    const playButton3 = document.getElementById("playButton5");
+    const infoModal3 = document.getElementById("infoModal5");
+    const videoModal3 = document.getElementById("videoModal5");
+    const closeInfoModal3 = document.getElementById("closeInfoModal5");
+    const closeModal = document.getElementById("closeModal5");
+    const modalVideo3 = document.getElementById("modalVideo5");
+
+    // Abre el modal con video y cierra el modal actual (infoModal2)
+    if (playButton3) {
+        playButton3.addEventListener("click", () => {
+            infoModal3.classList.add("hidden"); // Cierra el modal actual
+            videoModal3.classList.remove("hidden"); // Muestra el modal del video
+            modalVideo3.play(); // Reproduce el video
+        });
+    }
+
+    // Cierra el modal de información al hacer clic en el botón de cerrar
+    if (closeInfoModal3) {
+        closeInfoModal3.addEventListener("click", () => {
+            infoModal3.classList.add("hidden");
+        });
+    }
+
+    // Cierra el modal de video al hacer clic en el botón de cerrar
+    if (closeModal) {
+        closeModal.addEventListener("click", closeVideoModal);
+        closeModal.addEventListener("touchstart", closeVideoModal); // Para móviles
+    }
+
+    // Función para cerrar el modal de video
+    function closeVideoModal() {
+        videoModal3.classList.add("hidden"); // Oculta el modal de video
+        modalVideo3.pause(); // Pausa el video
+        modalVideo3.currentTime = 0; // Reinicia el video
+    }
+
+    // Cierra el modal de video al hacer clic fuera del video
+    videoModal3.addEventListener("click", (e) => {
+        if (e.target === videoModal3) {
+            closeVideoModal();
+        }
+    });
+
+    // Pausar/Reproducir al hacer clic en el video
+    modalVideo3.addEventListener("click", () => {
+        if (modalVideo3.paused) {
+            modalVideo3.play(); // Reproduce el video
+        } else {
+            modalVideo3.pause(); // Pausa el video
+        }
+    });
+});
+
+
+
+/// video san valentin 
+document.addEventListener("DOMContentLoaded", function() {
+    const playButton3 = document.getElementById("playButton6");
+    const infoModal3 = document.getElementById("infoModal6");
+    const videoModal3 = document.getElementById("videoModal6");
+    const closeInfoModal3 = document.getElementById("closeInfoModal6");
+    const closeModal = document.getElementById("closeModal6");
+    const modalVideo3 = document.getElementById("modalVideo6");
+
+    // Abre el modal con video y cierra el modal actual (infoModal2)
+    if (playButton3) {
+        playButton3.addEventListener("click", () => {
+            infoModal3.classList.add("hidden"); // Cierra el modal actual
+            videoModal3.classList.remove("hidden"); // Muestra el modal del video
+            modalVideo3.play(); // Reproduce el video
+        });
+    }
+
+    // Cierra el modal de información al hacer clic en el botón de cerrar
+    if (closeInfoModal3) {
+        closeInfoModal3.addEventListener("click", () => {
+            infoModal3.classList.add("hidden");
+        });
+    }
+
+    // Cierra el modal de video al hacer clic en el botón de cerrar
+    if (closeModal) {
+        closeModal.addEventListener("click", closeVideoModal);
+        closeModal.addEventListener("touchstart", closeVideoModal); // Para móviles
+    }
+
+    // Función para cerrar el modal de video
+    function closeVideoModal() {
+        videoModal3.classList.add("hidden"); // Oculta el modal de video
+        modalVideo3.pause(); // Pausa el video
+        modalVideo3.currentTime = 0; // Reinicia el video
+    }
+
+    // Cierra el modal de video al hacer clic fuera del video
+    videoModal3.addEventListener("click", (e) => {
+        if (e.target === videoModal3) {
+            closeVideoModal();
+        }
+    });
+
+    // Pausar/Reproducir al hacer clic en el video
+    modalVideo3.addEventListener("click", () => {
+        if (modalVideo3.paused) {
+            modalVideo3.play(); // Reproduce el video
+        } else {
+            modalVideo3.pause(); // Pausa el video
+        }
+    });
+});
+
+/// video salidas 
+document.addEventListener("DOMContentLoaded", function() {
+    const playButton7 = document.getElementById("playButton7");
+    const infoModal7 = document.getElementById("infoModal7");
+    const videoModal7 = document.getElementById("videoModal7");
+    const closeInfoModal7 = document.getElementById("closeInfoModal7");
+    const closeModal = document.getElementById("closeModal7");
+    const modalVideo7 = document.getElementById("modalVideo7");
+
+    // Abre el modal con video y cierra el modal actual (infoModal2)
+    if (playButton7) {
+        playButton7.addEventListener("click", () => {
+            infoModal7.classList.add("hidden"); // Cierra el modal actual
+            videoModal7.classList.remove("hidden"); // Muestra el modal del video
+            modalVideo7.play(); // Reproduce el video
+        });
+    }
+
+    // Cierra el modal de información al hacer clic en el botón de cerrar
+    if (closeInfoModal7) {
+        closeInfoModal7.addEventListener("click", () => {
+            infoModal7.classList.add("hidden");
+        });
+    }
+
+    // Cierra el modal de video al hacer clic en el botón de cerrar
+    if (closeModal) {
+        closeModal.addEventListener("click", closeVideoModal);
+        closeModal.addEventListener("touchstart", closeVideoModal); // Para móviles
+    }
+
+    // Función para cerrar el modal de video
+    function closeVideoModal() {
+        videoModal7.classList.add("hidden"); // Oculta el modal de video
+        modalVideo7.pause(); // Pausa el video
+        modalVideo7.currentTime = 0; // Reinicia el video
+    }
+
+    // Cierra el modal de video al hacer clic fuera del video
+    videoModal7.addEventListener("click", (e) => {
+        if (e.target === videoModal3) {
+            closeVideoModal();
+        }
+    });
+
+    // Pausar/Reproducir al hacer clic en el video
+    modalVideo7.addEventListener("click", () => {
+        if (modalVideo7.paused) {
+            modalVideo7.play(); // Reproduce el video
+        } else {
+            modalVideo7.pause(); // Pausa el video
+        }
+    });
+});
+
+
+
+// final
+
+document.addEventListener("DOMContentLoaded", function() {
+    const playButton11 = document.getElementById("playButton11");
+    const infoModal7 = document.getElementById("infoModal11");
+    const videoModal7 = document.getElementById("videoModal11");
+    const closeInfoModal7 = document.getElementById("closeInfoModal11");
+    const closeModal = document.getElementById("closeModal11");
+    const modalVideo7 = document.getElementById("modalVideo11");
+
+    // Abre el modal con video y cierra el modal actual (infoModal2)
+    if (playButton11) {
+        playButton11.addEventListener("click", () => {
+            infoModal7.classList.add("hidden"); // Cierra el modal actual
+            videoModal7.classList.remove("hidden"); // Muestra el modal del video
+            modalVideo7.play(); // Reproduce el video
+        });
+    }
+
+    // Cierra el modal de información al hacer clic en el botón de cerrar
+    if (closeInfoModal7) {
+        closeInfoModal7.addEventListener("click", () => {
+            infoModal7.classList.add("hidden");
+        });
+    }
+
+    // Cierra el modal de video al hacer clic en el botón de cerrar
+    if (closeModal) {
+        closeModal.addEventListener("click", closeVideoModal);
+        closeModal.addEventListener("touchstart", closeVideoModal); // Para móviles
+    }
+
+    // Función para cerrar el modal de video
+    function closeVideoModal() {
+        videoModal7.classList.add("hidden"); // Oculta el modal de video
+        modalVideo7.pause(); // Pausa el video
+        modalVideo7.currentTime = 0; // Reinicia el video
+    }
+
+    // Cierra el modal de video al hacer clic fuera del video
+    videoModal7.addEventListener("click", (e) => {
+        if (e.target === videoModal3) {
+            closeVideoModal();
+        }
+    });
+
+    // Pausar/Reproducir al hacer clic en el video
+    modalVideo7.addEventListener("click", () => {
+        if (modalVideo7.paused) {
+            modalVideo7.play(); // Reproduce el video
+        } else {
+            modalVideo7.pause(); // Pausa el video
+        }
+    });
+});
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    const infoButton = document.getElementById("infoButton11");
+    const infoModal = document.getElementById("infoModal11");
+    const closeInfoModal = document.getElementById("closeInfoModal11");
+
+    if (infoButton) {
+        infoButton.addEventListener("click", () => {
+            infoModal.classList.remove("hidden");
+        });
+    }
+
+    if (closeInfoModal) {
+        closeInfoModal.addEventListener("click", () => {
+            infoModal.classList.add("hidden");
+        });
+    }
+});
+
+
+
+
+    function openInfoModal() {
+        const infoModal2 = document.getElementById("infoModal2");
+        infoModal2.classList.remove("hidden");
+    }
+    const closeButton = document.getElementById('closeInfoModal2');
+
+    // Función para cerrar la modal
+    closeButton.addEventListener('click', () => {
+        infoModal2.classList.add('hidden'); 
+    });
+
+
+    function openInfoModal2() {
+        const infoModal3 = document.getElementById("infoModal3");
+        infoModal3.classList.remove("hidden");
+    }
+
+    const closeButton2 = document.getElementById('closeInfoModal3');
+    
+    closeButton2.addEventListener('click', () => {
+        infoModal3.classList.add('hidden'); 
+    });
+    
+    /// cumple
+    function openInfoModal3() {
+        const infoModal4 = document.getElementById("infoModal4");
+        infoModal4.classList.remove("hidden");
+    }
+
+    const closeButton3 = document.getElementById('closeInfoModal4');
+    
+    closeButton3.addEventListener('click', () => {
+        infoModal4.classList.add('hidden'); 
+    });
+    /// novios
+    function openInfoModal4() {
+        const infoModal5 = document.getElementById("infoModal5");
+        infoModal5.classList.remove("hidden");
+    }
+
+    const closeButton4 = document.getElementById('closeInfoModal5');
+    
+    closeButton4.addEventListener('click', () => {
+        infoModal5.classList.add('hidden'); 
+    });
+    /// sanvaletin
+    function openInfoModal5() {
+        const infoModal6 = document.getElementById("infoModal6");
+        infoModal6.classList.remove("hidden");
+    }
+
+    const closeButton5 = document.getElementById('closeInfoModal6');
+    
+    closeButton5.addEventListener('click', () => {
+        infoModal6.classList.add('hidden'); 
+    });
+    /// salida
+    function openInfoModal6() {
+        const infoModal7 = document.getElementById("infoModal7");
+        infoModal7.classList.remove("hidden");
+    }
+
+    const closeButton6 = document.getElementById('closeInfoModal7');
+    
+    closeButton6.addEventListener('click', () => {
+        infoModal7.classList.add('hidden'); 
+    });
+
+
+
+    var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1, // Muestra solo una imagen en móviles
+        spaceBetween: 10,
+        loop: true, // Hace el carrusel infinito
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 1,
+            },
+            768: {
+                slidesPerView: 2,
+            },
+            1024: {
+                slidesPerView: 3,
+            },
+            1280: {
+                slidesPerView: 4, // En pantallas grandes muestra 4 imágenes
+            }
+        }
+    });
+       
+    </script>
+
+</body>
+</html>

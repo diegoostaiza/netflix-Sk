@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="src/output.css" rel="stylesheet" />
+    <script src="js/main.js"></script>
+    <title>Netflix</title>
+</head>
+<body class="h-screen flex flex-col justify-center items-center bg-black text-white">
+    <div class="text-center mb-10">
+        <h1 class="text-3xl font-bold">¿Quién está viendo?</h1>
+    </div>
+    <div class="grid grid-cols-2 gap-8 md:grid-cols-2">
+        <div class="flex flex-col items-center cursor-pointer hover:opacity-75" onclick="seleccionarPerfil('Skarleth')">
+            <img src="media/img/perfil.jpg" alt="Perfil 1" class="w-32 h-32 rounded-md">
+            <p class="mt-2 text-lg">Skarleth</p>
+        </div>
+        <div class="flex flex-col items-center cursor-pointer hover:opacity-75" onclick="seleccionarPerfil('Invitado')">
+            <img src="media/img/perfil2.jpg" alt="Perfil 2" class="w-32 h-32 rounded-md">
+            <p class="mt-2 text-lg">Invitado</p>
+        </div>
+    </div>
+   
+</body>
+</html>

@@ -1,0 +1,26 @@
+@import "tailwindcss";
+@font-face {
+    font-family: 'Netflix';
+    src: url("../fonts/Bebas-Regular.ttf");
+}
+
+@font-face {
+    font-family: 'Title';
+    src: url("../fonts/Yellowtail-Regular.ttf");
+}
+
+@font-face {
+    font-family: 'NetflixSans';
+    src: url("../fonts/NetflixSans.ttf");
+}
+@font-face {
+    font-family: 'Digit';
+    src: url("../fonts/DS-DIGI.TTF");
+}
+
+
+
+/* CSS Code */
+
+    
+    

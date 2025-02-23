@@ -18,9 +18,21 @@
     src: url("../fonts/DS-DIGI.TTF");
 }
 
+.side-icon{
+    @apply fill-white w-7 h-7;
+}
 
+.tweet-icon{
+    @apply fill-sky-500 w-5 h-5;
+}
 
-/* CSS Code */
+.mobile-side-icon{
+    @apply fill-white w-6 h-6;
+}
+
+.without-ring {
+    @apply focus:ring-0 focus:ring-offset-0;
+  }
 
     
     

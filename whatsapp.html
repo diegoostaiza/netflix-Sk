@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="public/imgs/favicon-32x32.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+  <link rel="stylesheet" href="public/styles.css">
+  <title>WhatsApp</title>
+  <script>
+    function setUserTheme() {
+      if (!('theme' in localStorage)) {
+
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.documentElement.classList.add('dark')
+        } else {
+          document.documentElement.classList.remove('dark')
+        }
+        
+        localStorage.setItem('theme', 'default');
+      }
+
+      else if (localStorage.theme === 'default') {
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.documentElement.classList.add('dark')
+        } else {
+          document.documentElement.classList.remove('dark')
+        }
+      }
+
+      else if (localStorage.theme === 'dark') {
+        document.documentElement.classList.add('dark')
+      }
+
+      else {
+        document.documentElement.classList.remove('dark')
+      }
+    }
+
+    setUserTheme();
+  </script>
+</head>
+<body class="font-roboto w-full">
+  <div class="md:flex md:flex-row">
+    <div id="column-1" class="relative dark:bg-WADarkGreen w-full md:w-[45%] xl:w-2/5 h-screen overflow-y-auto">
+
+      <!--? search dropdown -->
+      <div class="relative md:fixed w-full md:w-2/5 z-10">
+        <div id="search-dropdown" class="fixed md:absolute top-0 bg-white shadow-md dark:bg-WADarkTeal px-4 py-2 w-full -translate-y-full transition-transform duration-500">
+
+          <div class="flex py-3 border-b-2 dark:border-b-0 border-b-gray-200">
+            <div class="grid place-content-center">
+              <img id="search-back-btn" class="w-5 mr-4" src="https://img.icons8.com/android/96/null/left.png" alt="back icon"/>
+            </div>
+            <input class="grow bg-inherit focus:outline-none dark:text-white caret-WATeal" type="text" placeholder="Search...">
+          </div>
+          
+          <div class="flex flex-wrap whitespace-nowrap py-2">
+            <div class="search-item">
+              <div class="flex items-center space-x-1.5">
+                <div class="w-2 h-2 search-item-img"><img src="https://img.icons8.com/material-sharp/96/null/image-gallery.png" alt="photos"/></div>
+                <div class="text-[10px] text-[#434f56] dark:text-[#c1d1db]">Photos</div>
+              </div>
+            </div>
+            <div class="search-item">
+              <div class="flex items-center space-x-1.5">
+                <div class="w-2 h-2 search-item-img"><img src="https://img.icons8.com/external-kmg-design-glyph-kmg-design/64/null/external-video-ui-essentials-kmg-design-glyph-kmg-design.png" alt="video"/></div>
+                <div class="text-[10px] text-[#434f56] dark:text-[#c1d1db]">Video</div>
+              </div>
+            </div>
+            <div class="search-item">
+              <div class="flex items-center space-x-1.5">
+                <div class="w-2 h-2 search-item-img"><img src="https://img.icons8.com/material-rounded/96/null/link--v1.png" alt="links"/></div>
+                <div class="text-[10px] text-[#434f56] dark:text-[#c1d1db]">Links</div>
+              </div>
+            </div>
+            <div class="search-item">
+              <div class="flex items-center space-x-1.5">
+                <div class="w-2 h-2 search-item-img"><img src="https://img.icons8.com/ios-glyphs/90/null/attach-gif.png" alt="gifs"/></div>
+                <div class="text-[10px] text-[#434f56] dark:text-[#c1d1db]">Gifs</div>
+              </div>
+            </div>
+            <div class="search-item">
+              <div class="flex items-center space-x-1.5">
+                <div class="w-2 h-2 search-item-img"><img src="https://img.icons8.com/external-smashingstocks-glyph-smashing-stocks/100/null/external-headphone-network-and-communication-smashingstocks-glyph-smashing-stocks.png" alt="audio"/></div>
+                <div class="text-[10px] text-[#434f56] dark:text-[#c1d1db]">Audio</div>
+              </div>
+            </div>
+            <div class="search-item">
+              <div class="flex items-center space-x-1">
+                <div class="w-2 h-2 search-item-img"><img src="https://img.icons8.com/external-tanah-basah-glyph-tanah-basah/96/null/external-documents-design-thinking-tanah-basah-glyph-tanah-basah.png" alt="documents"/></div>
+                <div class="text-[10px] text-[#434f56] dark:text-[#c1d1db]">Documents</div>
+              </div>
+            </div>
+          </div>
+  
+        </div>
+      </div>
+
+      <!--? settings dropdown -->
+      <div class="relative md:fixed w-full md:w-2/5 z-10">
+        <div id="settings" class="fixed md:absolute top-0 right-0 animate-faster dark:bg-WADarkGreen dark:text-white focus:outline-none hidden w-3/5 text-black bg-white shadow-md" tabindex="-1">
+          <ul>
+            <li class="options">New Group</li>
+            <li class="options">New Broadcast</li>
+            <li class="options">Linked Device</li>
+            <li class="options">Starred Messages</li>
+            <li class="options status-option">Status privacy</li>
+            <li class="options call-option">Clear logs</li>
+            <a class="options-setting block md:hidden" href="public/pages/settings.html">Settings</a>
+            <li class="options-setting hidden md:block" id="int-setting-btn">Settings</li>
+          </ul>
+        </div>
+      </div>
+
+      <!--? top nav -->
+      <div class="relative flex flex-row items-center pt-6 px-6 w-full md:sticky md:top-0 z-[5] bg-WATeal dark:bg-WADarkTeal text-white dark:text-gray-400">
+        <div class="justify-self-start text-2xl font-bold">WhatsApp</div>
+        <div class="flex gap-4 ml-auto">
+          <img class="dual w-6" src="https://img.icons8.com/fluency-systems-regular/100/null/camera.png" alt="camera"/>
+          <img class="dual w-6" id="search-btn" src="https://img.icons8.com/ios-glyphs/100/000000/search--v1.png" alt="search">
+          <img class="dual w-6" id="setting-btn" src="https://img.icons8.com/external-glyph-silhouettes-icons-papa-vector/100/null/external-Menu-interface-glyph-silhouettes-icons-papa-vector-3.png" alt="kebab">
+        </div>
+      </div>
+
+      <!--? bottom nav -->
+      <div class="flex flex-row items-center justify-between pt-4 px-6 w-full z-[5] sticky top-0 md:top-[55px] bg-WATeal dark:bg-WADarkTeal dark:text-gray-400 shadow-md">
+        <div class="nav-items active space-x-1">
+          <div class="text-gray-100 hover:text-white dark:hover:text-WATeal transition-colors duration-300" data-slide-index="0">Chats</div>
+          <div class="bg-white dark:bg-WATeal text-WATeal dark:text-WADarkTeal text-[0.5rem] w-5 h-5 leading-[0] flex-center text-center rounded-full">11</div>
+        </div>
+        <div class="nav-items space-x-1.5" data-slide-index="1">
+          <div class="text-gray-100 hover:text-white dark:hover:text-WATeal transition-colors duration-300">Estados</div>
+          <div id="status-update-notification" class="bg-gray-100 hover:bg-white w-1.5 h-1.5 leading-[0] rounded-full"></div>
+        </div>
+        <div class="nav-items text-gray-100 hover:text-white dark:hover:text-WATeal transition-colors duration-300" data-slide-index="2">Llamadas</div>
+      </div>
+
+      <!--? main -->
+      <div id="slides-container" class="bg-white dark:bg-WADarkGreen">
+        <div class="swiper">
+          <div class="swiper-wrapper">
+
+            <section id="chats" class="swiper-slide">
+            
+            
+            
+              <div class="chats" friend-name="Mi princesa ❤️" friend-status="En línea" img-name="primeraCita" img-format="jpeg">
+                <div class="flex">
+                  <div>
+                    <img class="w-14 h-14 object-cover rounded-full" src="public/imgs/friends/primeraCita.jpeg" alt="friend">
+                  </div>
+                  <div class="flex flex-col gap-y-1 p-3">
+                    <div class="dark:text-white text-sm font-bold text-black">Mi princesa ❤️</div>
+                    <div class="flex items-center gap-x-0.5">
+                      <div class="flex items-center justify-center pt-0.5">
+                        <svg class="flex items-center justify-center" height="17" width="17">
+                          <use xlink:href="#double-checkmark" fill="#8696A0"></use>
+                        </svg>
+                      </div>
+                      <div
+                        class="items-center dark:text-gray-400 text-xs font-normal text-gray-900 truncate leading-none long-text-with-marks">
+                        <div class="mt-1 text-xs font-normal text-WABrightGreen">Escribiendo...</div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-1 justify-center my-1 text-[8px]">
+                  <div class="text-gray-900 dark:text-gray-400 grid place-items-center whitespace-nowrap">08:09 PM</div>
+                  <div
+                    class="invisible mt-1 mx-auto w-6 py-3 text-center text-white bg-WABrightGreen dark:bg-WADarkGreen2 dark:text-WADarkGreen leading-[0] rounded-full">
+                    1</div>
+                </div>
+              </div>
+            
+             
+            
+              <div class="chats" friend-name="Enojos 2.0" friend-status="tap here for group info"
+                img-name="f1" img-format="jpeg">
+                <div class="flex">
+                  <div>
+                    <img class="w-14 h-14 object-cover rounded-full" src="public/imgs/friends/f1.jpeg" alt="friend">
+                  </div>
+                  <div class="flex flex-col p-3">
+                    <div class="dark:text-white text-sm font-bold text-black truncate long-text">Enojos 2.0</div>
+                    <div class="dark:text-gray-400 mt-1 text-xs font-normal text-gray-900 truncate long-text">pipipipipipipi</div>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-1 justify-center my-1 text-[8px]">
+                  <div class="text-WABrightGreen dark:text-WADarkGreen2 grid place-items-center whitespace-nowrap">06:11 PM</div>
+                  <div
+                    class="mx-auto w-6 py-3 text-center text-white bg-WABrightGreen dark:bg-WADarkGreen2 dark:text-WADarkGreen leading-[0] rounded-full">
+                    4</div>
+                </div>
+              </div>
+            
+                
+            </section>
+            
+            <section id="status" class="swiper-slide">
+
+              <div class="status flex justify-between">
+                <div class="flex">
+                  <div class="status-9">
+                    <img class="w-14 h-14 m-1.5 object-cover rounded-full" src="public/imgs/friends/primeraCita.jpeg" alt="my status">
+                  </div>
+                  <div class="flex flex-col gap-y-1 justify-center py-3 px-4">
+                    <div class="dark:text-white text-sm font-bold text-black">Mi estado</div>
+                    <div class="dark:text-gray-400 text-xs font-normal text-gray-900">Hoy, 3:08 PM</div>
+                  </div>
+                </div>
+                <div class="grid place-items-center">
+                  <svg class="transform rotate-90" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="24" width="24" preserveAspectRatio="xMidYMid meet" class="" version="1.1" x="0px" y="0px" enable-background="new 0 0 24 24" xml:space="preserve">
+                    <path fill="#54656F" d="M12,7c1.104,0,2-0.896,2-2c0-1.105-0.895-2-2-2c-1.104,0-2,0.894-2,2 C10,6.105,10.895,7,12,7z M12,9c-1.104,0-2,0.894-2,2c0,1.104,0.895,2,2,2c1.104,0,2-0.896,2-2C13.999,9.895,13.104,9,12,9z M12,15 c-1.104,0-2,0.894-2,2c0,1.104,0.895,2,2,2c1.104,0,2-0.896,2-2C13.999,15.894,13.104,15,12,15z"></path>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="w-full px-3 py-2 text-left text-gray-900 dark:text-gray-400 text-xs font-medium">Recent updates</div>
+
+              <div class="status">
+                <div class="flex">
+                  <div class="status-21">
+                    <img class="w-14 h-14 m-1.5 object-cover rounded-full" src="./public/imgs/friends/primeraCita.jpeg"
+                      alt="status">
+                  </div>
+                  <div class="flex flex-col gap-y-1 justify-center py-3 px-4">
+                    <div class="dark:text-white text-sm font-bold text-black">Mi princesa ❤️</div>
+                    <div class="dark:text-gray-400 text-xs font-normal text-gray-900">1 minuto</div>
+                  </div>
+                </div>
+              </div>
+                
+            
+
+              <div class="status">
+                <div class="flex">
+                  <div class="status-12">
+                    <img class="w-14 h-14 m-1.5 object-cover rounded-full" src="./public/imgs/status/science-archives.jpg" alt="status">
+                  </div>
+                  <div class="flex flex-col gap-y-1 justify-center py-3 px-4">
+                    <div class="dark:text-white text-sm font-bold text-black">Adrian</div>
+                    <div class="dark:text-gray-400 text-xs font-normal text-gray-900">52 minutos</div>
+                  </div>
+                </div>
+              </div>
+                                
+  
+              <div class="status">
+                <div class="flex">
+                  <div class="status-12">
+                    <img class="w-14 h-14 m-1.5 object-cover rounded-full" src="./public/imgs/status/science-archives.jpg" alt="status">
+                  </div>
+                  <div class="flex flex-col gap-y-1 justify-center py-3 px-4">
+                    <div class="dark:text-white text-sm font-bold text-black">Beltran</div>
+                    <div class="dark:text-gray-400 text-xs font-normal text-gray-900">15 minutos</div>
+                  </div>
+                </div>
+              </div>
+                                
+  
+             
+              
+            </section>       
+
+            <section id="calls" class="swiper-slide">
+              <div class="flex justify-start px-3 py-3 space-x-3 transition bg-white dark:bg-WADarkGreen hover:bg-gray-200 hover:dark:bg-WADarkTeal cursor-default">
+                <div class="grid place-items-center">
+                  <div class="rounded-full grid place-items-center bg-WATeal w-12 h-12 cursor-pointer">
+                    <img width="24" height="24" class="w-5 h-5 filter invert sepia-0 saturate-[7491%] hue-rotate-[349deg] brightness-100 contrast-100" src="https://img.icons8.com/external-tal-revivo-bold-tal-revivo/24/external-online-web-link-attach-with-url-information-text-bold-tal-revivo.png" alt="link"/>
+                  </div>
+                </div>
+                <div class="flex flex-col justify-center text-sm">
+                  <div class="font-bold text-black dark:text-white">Create call link</div>
+                  <div class="font-normal text-gray-900 dark:text-gray-400 mt-1">Share link for your Whatsapp call</div>
+                </div>
+              </div>
+
+              <div class="text-black dark:text-white text-sm font-bold px-3 py-1">Reciente</div>
+
+              <!--? calls -->
+              <div class="" aria-labelledby="calls">
+                
+                <div class="recent-calls">
+                  <div class="flex space-x-3">
+                    <div aria-labelledby="image-holder">
+                      <img src="public/imgs/friends/primeraCita.jpeg" alt="ife" class="rounded-full object-cover w-14 h-14">
+                    </div>
+                    <div class="flex flex-col justify-center space-y-1 text-sm">
+                      <div class="font-bold text-black dark:text-white">Mi princesa ❤️</div>
+                      <div class="flex space-x-1">
+                        <p class="text-green-500">&#8599;</p>
+                        <div class="font-normal text-gray-900 dark:text-gray-400">(1) Dia, 10:06 PM</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="grid place-items-center">
+                    <img class="w-6 h-6 cursor-pointer" width="96" height="96" src="public/imgs/icons8-phone-96.png" alt="phone--v1"/>
+                  </div>
+                </div>
+                <div class="recent-calls">
+                  <div class="flex space-x-3">
+                    <div aria-labelledby="image-holder">
+                      <img src="public/imgs/friends/primeraCita.jpeg" alt="ife" class="rounded-full object-cover w-14 h-14">
+                    </div>
+                    <div class="flex flex-col justify-center space-y-1 text-sm">
+                      <div class="font-bold text-black dark:text-white">Mi princesa ❤️</div>
+                      <div class="flex space-x-1">
+                        <p class="text-green-500">&#8599;</p>
+                        <div class="font-normal text-gray-900 dark:text-gray-400">(2) Dias, 12:06 PM</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="grid place-items-center">
+                    <img class="w-6 h-6 cursor-pointer" width="96" height="96" src="public/imgs/icons8-phone-96.png" alt="phone--v1"/>
+                  </div>
+                </div>
+                <div class="recent-calls">
+                  <div class="flex space-x-3">
+                    <div aria-labelledby="image-holder">
+                      <img src="public/imgs/friends/primeraCita.jpeg" alt="ife" class="rounded-full object-cover w-14 h-14">
+                    </div>
+                    <div class="flex flex-col justify-center space-y-1 text-sm">
+                      <div class="font-bold text-black dark:text-white">Mi princesa ❤️</div>
+                      <div class="flex space-x-1">
+                        <p class="text-green-500">&#8599;</p>
+                        <div class="font-normal text-gray-900 dark:text-gray-400">(4) Dias, 11:16 PM</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="grid place-items-center">
+                    <img class="w-6 h-6 cursor-pointer" width="96" height="96" src="public/imgs/icons8-phone-96.png" alt="phone--v1"/>
+                  </div>
+                </div>
+
+             
+
+              </div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="fixed right-5 bottom-5 md:right-[61.5%] xl:right-[63%] z-[999] w-14 h-14 rounded-full bg-WABrightGreen flex items-center justify-center shadow-md">
+
+        <div id="chats-message-icon" class="flex justify-center items-center">
+          <svg viewBox="0 0 24 24" height="24" width="24" preserveAspectRatio="xMidYMid meet" class="" version="1.1" x="0px"
+            y="0px" enable-background="new 0 0 24 24" xml:space="preserve">
+            <path fill="#ffffff" enable-background="new"
+              d="M19.005,3.175H4.674C3.642,3.175,3,3.789,3,4.821V21.02 l3.544-3.514h12.461c1.033,0,2.064-1.06,2.064-2.093V4.821C21.068,3.789,20.037,3.175,19.005,3.175z M14.016,13.044H7.041V11.1 h6.975V13.044z M17.016,9.044H7.041V7.1h9.975V9.044z">
+            </path>
+          </svg>
+        </div>
+        
+      
+      
+      </div>
+
+      <div id="status-pen-icon"
+        class="fixed right-[1.625rem] bottom-[1.625rem] z-10 w-11 h-11 rounded-full flex justify-center items-center bg-blue-100 dark:bg-gray-600 transition-transform duration-500 ease-out shadow-md">
+        <img width="100" height="100"
+          class="dark:hidden"
+          src="https://img.icons8.com/external-others-inmotus-design/100/000000/external-Pen-result-others-inmotus-design-5.png"
+          alt="external-Pen-result-others-inmotus-design-5" />
+        <img width="100" height="100"
+          class="hidden dark:block"
+          src="https://i.postimg.cc/Xp15YWgQ/icons8-pen-100-whatsapp-darkmode-status-pen-icon-white.png"
+          alt="icons8-pen-100-whatsapp-dark-mode-status-pen-icon-white" />
+      </div>
+    </div>
+    
+    <div id="column-2" class="hidden md:block md:w-[65%] xl:w-3/5 h-screen overflow-y-auto ">
+      <div id="column-2-default-inner" class="dark:bg-WADarkTeal border-b-WADarkGreen2 dark:border-b-WATeal flex flex-col w-full h-screen bg-gray-200 border-b-8">
+        <div class="mt-[25vh] flex justify-center">
+          <img class="dark:hidden" src="public/imgs/mobile-and-desktop-light.svg" alt="mobile and desktop">
+          <img class="dark:block hidden" src="public/imgs/mobile-and-desktop-dark.svg" alt="mobile and desktop">
+        </div>
+        <div class="mt-7 dark:text-gray-50 mx-auto text-2xl font-thin text-center text-gray-600">WhatsApp Web</div>
+        <div class="dark:text-gray-400 mx-auto mt-4 text-xs text-center text-gray-600">
+          Send and receive messages without keeping your phone online.
+        </div>
+        <div class="dark:text-gray-400 mx-auto text-xs text-center text-gray-600">
+          Use WhatsApp on up to 4 linked devices and 1 phone at the same time.
+        </div>
+        <div class="dark:text-gray-400 mx-auto mt-12 text-xs text-center text-gray-600">
+        <img class="inline-flex w-3 mb-[2px] mr-[1px]" src="public/imgs/lock.svg" alt="lock">
+          End-to-end encrypted
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <svg class="hidden">
+    <symbol id="double-checkmark" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" height="14" width="14" preserveAspectRatio="xMidYMid meet" class="" version="1.1" x="0px" y="0px" enable-background="new 0 0 18 18" xml:space="preserve">
+      <path fill="" d="M17.394,5.035l-0.57-0.444c-0.188-0.147-0.462-0.113-0.609,0.076l-6.39,8.198 c-0.147,0.188-0.406,0.206-0.577,0.039l-0.427-0.388c-0.171-0.167-0.431-0.15-0.578,0.038L7.792,13.13 c-0.147,0.188-0.128,0.478,0.043,0.645l1.575,1.51c0.171,0.167,0.43,0.149,0.577-0.039l7.483-9.602 C17.616,5.456,17.582,5.182,17.394,5.035z M12.502,5.035l-0.57-0.444c-0.188-0.147-0.462-0.113-0.609,0.076l-6.39,8.198 c-0.147,0.188-0.406,0.206-0.577,0.039l-2.614-2.556c-0.171-0.167-0.447-0.164-0.614,0.007l-0.505,0.516 c-0.167,0.171-0.164,0.447,0.007,0.614l3.887,3.8c0.171,0.167,0.43,0.149,0.577-0.039l7.483-9.602 C12.724,5.456,12.69,5.182,12.502,5.035z"></path>
+    </symbol>
+
+    <symbol id="single-checkmark" viewBox="0 0 14 18" height="18" width="14" preserveAspectRatio="xMidYMid meet" class="" version="1.1" x="0px" y="0px" enable-background="new 0 0 14 18" xml:space="preserve">
+      <path fill="#8696A0" d="M12.502,5.035l-0.57-0.444c-0.188-0.147-0.462-0.113-0.609,0.076l-6.39,8.198 c-0.147,0.188-0.406,0.206-0.577,0.039l-2.614-2.556c-0.171-0.167-0.447-0.164-0.614,0.007l-0.505,0.516 c-0.167,0.171-0.164,0.447,0.007,0.614l3.887,3.8c0.171,0.167,0.43,0.149,0.577-0.039l7.483-9.602 C12.724,5.456,12.69,5.182,12.502,5.035z"></path>
+    </symbol>
+
+    <symbol id="mic" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="16" width="16" preserveAspectRatio="xMidYMid meet" class="" version="1.1" x="0px" y="0px" enable-background="new 0 0 24 24" xml:space="preserve">
+      <path fill="" d="M11.999,14.942c2.001,0,3.531-1.53,3.531-3.531V4.35c0-2.001-1.53-3.531-3.531-3.531 S8.469,2.35,8.469,4.35v7.061C8.469,13.412,9.999,14.942,11.999,14.942z M18.237,11.412c0,3.531-2.942,6.002-6.237,6.002 s-6.237-2.471-6.237-6.002H3.761c0,4.001,3.178,7.297,7.061,7.885v3.884h2.354v-3.884c3.884-0.588,7.061-3.884,7.061-7.885 L18.237,11.412z"></path>
+    </symbol>
+  </svg>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  <script src="public/script.js"></script>
+</body>
+</html>

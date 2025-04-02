@@ -803,6 +803,9 @@
   .m-1\.5 {
     margin: calc(var(--spacing) * 1.5);
   }
+  .m-3 {
+    margin: calc(var(--spacing) * 3);
+  }
   .m-auto {
     margin: auto;
   }
